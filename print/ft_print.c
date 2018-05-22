@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 21:40:30 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/08 22:22:26 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/20 18:48:43 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,99 +29,60 @@ int		find_len(const char *str)
 	return (0);
 }
 
-int		outgen(t_data *curr, char *print)
+int		hexgen2(char *print, char *snew, t_data *curr)
 {
-	char	*snew;
-	int		tmp;
-	int		pad;
-
-	tmp = 0;
-	if (curr->pad > curr->precision)
-		pad = curr->precision;
-	else
-		pad = curr->pad;
-	if (!curr->pad && !curr->precision)
+	if (curr->lr && snew)
 	{
-		tmp = ft_strlen(print);
 		ft_mputstr(print, curr);
+		ft_mputstr(snew, curr);
+		ft_memdel((void*)&print);
+		ft_memdel((void*)&snew);
+	}
+	else if (snew)
+	{
+		ft_mputstr(snew, curr);
+		ft_mputstr(print, curr);
+		ft_memdel((void*)&print);
+		ft_memdel((void*)&snew);
 	}
 	else
 	{
-		snew = ft_memalloc(pad);
-		if (curr->precision)
-			ft_memset(snew, '0', pad - ft_strlen(print));
-		else
-			ft_memset(snew, curr->chrfil, pad - ft_strlen(print));
-		if (curr->lr)
-		{
-			ft_mputstr(print, curr);
-			ft_mputstr(snew, curr);
-		}
-		else
-		{
-			ft_mputstr(snew, curr);
-			ft_mputstr(print, curr);
-		}
-		tmp = ft_strlen(snew) + ft_strlen(print);
-		free(snew);
+		ft_mputstr(print, curr);
+		ft_memdel((void*)&print);
 	}
-	free(print);
-	return (tmp);
+	return (1);
 }
 
 /*
  *
- *	Account for all precision padding here
- *	then when we get to outgen we only worry about padding if it still applies
- *
+ *	Don't handle + sign
  *
  */
 
 int		print_octal(t_data *curr, va_list list)
 {
-	char	*print;
-	char	*tmp;
-	int		i;
+	char				*print;
+	char				*snew;
+	unsigned long long	stor;
+	int					i;
 
 	i = 0;
-	print = ft_uitoabase(uint_flags(curr, list), 8);
-	if ((curr->hash) && ft_strcmp("0", print))
-	{
-		tmp = print;
-		print = ft_strjoin("0", print);
-		free(tmp);
-	}
-	return (outgen(curr, print));
+	snew = 0;
+	stor = uint_flags(curr, list);
+	if (curr->lr && curr->chrfil == 48)
+		curr->chrfil = 32;
+	if (!curr->precision && curr->precheck && !stor && !curr->pad && !curr->hash)
+		return (1);
+	if (!curr->precision && curr->precheck && !stor && curr->pad && !curr->hash)
+		return (hexgen2(new_data("", curr), 0, curr));
+	print = ft_uitoabase(stor, 8);
+	if ((curr->hash) && stor)
+		print = prep_x(print, "0");
+	if (curr->precheck && curr->precision > (int)ft_strlen(print))
+		print = make_pre(curr, print);
+	if ((int)ft_strlen(print) < curr->pad && curr->chrfil == 48)
+		print = make_pad(curr, print);
+	if ((int)ft_strlen(print) < curr->pad && curr->chrfil != 48)
+		snew = new_data(print, curr);
+	return (hexgen2(print, snew, curr));
 }
- 
-int		print_int(char c, t_data *curr, va_list list)
-{
-	char			*print;
-	char			*tmp;
-	int				i;
-
-	i = -1;
-	if (c == 'D')
-	{
-		curr->mod[0] = 'l';
-		print = ft_itoabase(nint_flags(curr, list), 10);
-	}
-	if (c == 'd' || c == 'i')
-	{
-		print = ft_itoabase(nint_flags(curr, list), 10);
-		if (curr->precheck && !curr->precision)
-		{
-			//double check this. this doesn't seem solid
-			//hmmmm
-			ft_memdel((void**)&print);
-			return (1);
-		}
-	}
-	if (curr->plus && c != 'o' && print[0] != '-' && c != 'O')
-	{
-		tmp = print;
-		print = ft_strjoin("+", print);
-		free(tmp);
-	}
-	return (outgen(curr, print));
-} 

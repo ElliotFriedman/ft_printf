@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 22:49:16 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/08 22:20:46 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/17 00:19:54 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int		numlen(long long nbr, int base)
 	int	len;
 
 	len = 0;
+	if (!nbr)
+		return (2);
 	while (nbr)
 	{
 		nbr /= base;
@@ -65,29 +67,22 @@ int		numlen(long long nbr, int base)
 
 char 	*ft_itoabase(long long nbr, int base)
 {
-	//check this hardcoded max and see if there is a cleaner way to implement
 	char		*str;
 	long long	stand;
-	int			i;
 	int			x;
 
-//	if (nbr == -9223372036854775808)
-//		return (ft_strdup(-9223372036854775808));
-	i = 0;
-	x = numlen(nbr, base);
-	str = ft_strnew(x + 2);
-	//while loop in here with that sets numbers
+	x = numlen(nbr, base) - 1;
+	str = ft_memalloc(x + 2);
 	if (!nbr)
 		str[0] = '0';
 	stand = nbr;
 	if (nbr < 0)
 	{
-		str[i] = '-';
+		//check this logic
+//		str[i] = '-';
 		stand = nbr * -1;
-		x++;
-		i++;
+//		x++;
 	}
-	x--;
 	while (stand)
 	{
 		str[x] = set(stand % base);

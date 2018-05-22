@@ -11,7 +11,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = libft.a
 
@@ -24,7 +24,6 @@ SRC = ft_atoi.c \
 	  ft_isascii.c \
 	  ft_isdigit.c \
 	  ft_isprint.c \
-	  ft_itoa.c \
 	  ft_memalloc.c \
 	  ft_memccpy.c \
 	  ft_memchr.c \
@@ -75,6 +74,11 @@ SRC = ft_atoi.c \
 	  ft_lstadd.c \
 	  ft_lstiter.c \
 	  ft_lstmap.c \
+	  ft_matoi.c \
+	  ft_prep_x.c \
+	  ft_make_pad.c \
+	  ft_make_pre.c \
+	  ft_upper.c
 
 
 OBJ = $(SRC:.c=.o)
@@ -84,9 +88,6 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-
-%.o: %.c
-	gcc $(FLAGS) -c $< -o $@
 
 clean:
 	@$(TRASH) $(OBJ)

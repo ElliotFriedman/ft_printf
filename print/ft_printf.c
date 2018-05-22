@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:23:10 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/08 22:22:12 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 09:59:59 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,38 @@
 int		find(char c, va_list list, t_data *curr)
 {
 	if (c == 'O' || c == 'o')
+	{
+		if (c == 'O')
+			ft_strncpy(curr->mod, "l", 1);
 		return (print_octal(curr, list));
-	else if (c == 'u' || c == 'U' || c == 'X' || c == 'x' || c == 'p')
-		return (print_ints(c, curr, list));
+	}
+	else if (c == 'U' || c == 'u')
+	{
+		if (c == 'U')
+			ft_strncpy(curr->mod, "ll", 2);
+		return (print_uint(curr, list));
+	}
 	else if (c == 'd' || c == 'i' || c == 'D')
-		return (print_int(c, curr, list));
-	else if (c == 'c')
-		return (print_char(c, curr, list));
-	else if (c == 's')
-		return (print_str(c, curr, list));
+	{
+		if (c == 'D')
+			ft_strncpy(curr->mod, "l", 1);
+		return (print_int(curr, list));
+	}
+	else if (c == 'c' && curr->mod[0] != 'l')
+		return (print_char(curr, list));
+	else if (c == 'C' || (c == 'c' && curr->mod[0] == 'l'))
+		return (print_wchar(curr, list));
+	else if (c == 's' && curr->mod[0] != 'l')
+		return (print_str(curr, list));
+	else if (c == 'S' || (c == 's' && curr->mod[0] == 'l'))
+		return (print_wstr(curr, list));
+	else if (c == 'x' || c == 'X')
+		return (print_hex(c, curr, list));
+	else if (c == 'p')
+	{
+		ft_strncpy(curr->mod, "ll", 2);
+		return (print_addy(curr, list));
+	}
 	return (0);
 }
 
@@ -42,19 +65,23 @@ int		ft_putstr_until(const char *str, t_data *curr)
 {
 	int i;
 	int flag;
-	int	x;
+	int x;
 
-	x = 100;
+	x = 0;
 	flag = 0;
 	i = 0;
 	if (str[0] == '%' && !(exception(str, &x)))
+	{
+		curr->sum++;
 		return (1);
+	}
 	while ((str[i] && str[i] != '%') || (exception(&str[i], &i)))
 	{
 		curr->iter++;
 		write(1, &str[i], 1);
 		i++;
 	}
+	curr->sum += i;
 	if (str[i] == 0)
 		return (0);
 	return (i);
@@ -62,7 +89,6 @@ int		ft_putstr_until(const char *str, t_data *curr)
 
 void	init(t_data *curr)
 {
-	curr->exception = 0;
 	curr->plus = 0;
 	curr->precheck = 0;
 	curr->precision = 0;
@@ -72,6 +98,8 @@ void	init(t_data *curr)
 	curr->chrfil = 0;
 	curr->lr = 0;
 	curr->len = 0;
+	curr->negative = 0;
+	curr->chk = 0;
 	ft_bzero(curr->mod, 2);
 }
 
@@ -79,21 +107,19 @@ int		ft_printf(const char *str, ...)
 {
 	va_list	list;
 	t_data	*curr;
-	int		tmp;
+	int	tmp;
 
 	curr = ft_memalloc(sizeof(t_data));
-	curr->sum = 0;
-	curr->iter = 0;
 	va_start(list, str);
 	while ((tmp = ft_putstr_until(&str[curr->sum], curr)))
 	{
-		curr->sum += tmp;
-		if (!curr->exception)
+		find_flags(curr, &str[curr->sum]);
+		while ((str[curr->sum])
+				&& !(find(str[curr->sum], list, curr)))
 		{
-			find_flags(curr, &str[curr->sum]);
-			while ((str[curr->sum])
-					&& !(find(str[curr->sum], list, curr)))
-				curr->sum++;
+			curr->sum++;
+			if (str[curr->sum] == '%')
+				print_per(curr);
 		}
 		if (curr->sum == (int)ft_strlen(str))
 			break;

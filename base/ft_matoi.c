@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 19:02:29 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/08 22:21:22 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/17 20:31:20 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*ft_clr_whitespace(const char *str)
 	int x;
 
 	x = find_len(str);
-	while (!ft_isdigit(*str) && *str != '.' && *str != '\n' && *str && x)
+	while ((!ft_isdigit(*str) || *str == '0') && *str != '.' && *str != '\n' && *str && x)
 	{
 		x--;
 		str++;

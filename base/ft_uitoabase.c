@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 22:49:16 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/08 22:21:05 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/16 23:00:36 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int		u_numlen(unsigned long long nbr, int base)
 	int	len;
 
 	len = 0;
+	if (!nbr)
+		return (1);
 	while (nbr)
 	{
 		nbr /= base;
@@ -78,7 +80,7 @@ char 	*ft_uitoabase(unsigned long long nbr, int base)
 	cnt = 0;
 	i = 0;
 	x = u_numlen(nbr, base) - 1;
-	str = ft_strnew(x + 2);
+	str = ft_memalloc(x + 3);
 	if (!nbr)
 		str[0] = '0';
 	while (nbr)

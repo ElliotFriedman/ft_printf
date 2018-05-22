@@ -2,4 +2,15 @@
 #recompile an executable and run it.
 make fclean && make && clear
 gcc main.c libftprintf.a
-./a.out
+echo "
+
+
+"
+./a.out | cat -e
+#sh clean.sh
+
+echo "
+
+
+
+"

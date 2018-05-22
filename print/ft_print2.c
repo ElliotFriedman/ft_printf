@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 21:03:32 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/08 22:22:57 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/20 12:38:18 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,44 +30,43 @@ int		outgen2(char *print, t_data *curr)
 			ft_mputstr(buf, curr);
 			ft_mputstr(print, curr);
 		}
-		free(buf);
+		ft_memdel((void*)&buf);
+		ft_memdel((void*)&print);
 	}
 	else
+	{
 		ft_mputstr(print, curr);
-	free(print);
+		ft_memdel((void*)&print);
+	}
 	return (1);
 }
 
-int		print_ints(char c, t_data *curr, va_list list)
+char		*help(char *tmp, char *print)
 {
-	char	*tmp;
-	char	*new;
-	char	*print;
-	int		i;
+	tmp = print;
+	print = ft_strjoin("0x", print);
+	return (print);
+}
 
-	i = -1;
-	if (c == 'u')
-		print = ft_uitoabase(uint_flags(curr, list), 10);
-	else if (c == 'U')
-		print = ft_uitoabase(uint_flags(curr, list), 10);
-	else if (c == 'x' || c == 'X' || c == 'p')
-		print = ft_uitoabase(uint_flags(curr, list), 16);
-	if (c == 'X')
-		while (print[++i])
-			print[i] = ft_toupper(print[i]);
-	if (curr->precheck && curr->precision > (int)ft_strlen(print))
+int		print_per(t_data *curr)
+{
+	char	*str;
+
+	if (curr->pad)
 	{
-		tmp = print;
-		new = ft_memalloc(curr->precision - ft_strlen(print));
-		ft_memset(new, 48, curr->precision - ft_strlen(print));
-		print = ft_strjoin(new, print);
-		free(tmp);
+		str = ft_memalloc(curr->pad);
+		ft_memset(str, 32, curr->pad - 1);
 	}
-	if ((c == 'p' || c == 'x' || c == 'X') && curr->hash)
+	if (!curr->lr)
 	{
-		tmp = print;
-		print = ft_strjoin("0x", print);
-		free(tmp);
+		ft_mputstr(str, curr);
+		ft_putchar('%');
 	}
-	return (outgen2(print, curr));
+	else
+	{
+		ft_putchar('%');
+		ft_mputstr(str, curr);
+	}
+	curr->iter++;
+	return (1);
 }
