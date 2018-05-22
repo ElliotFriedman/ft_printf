@@ -6,11 +6,11 @@
 #    By: efriedma <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/04 17:04:47 by efriedma          #+#    #+#              #
-#    Updated: 2018/05/22 13:22:38 by efriedma         ###   ########.fr        #
+#    Updated: 2018/05/22 16:46:27 by efriedma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 
@@ -38,17 +38,16 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	@$(MAKE) -C $(LIBFT)
 	@ar rc $(NAME) $(OBJ) libft/*.o
 	@ranlib $(NAME) libft/libft.a
 
 clean:
 	$(TRASH) $(OBJ)
+	@$(MAKE) -C $(LIBFT) clean
 
 fclean: clean
 	$(TRASH) $(NAME)
+	@$(MAKE) -C $(LIBFT) fclean
 
 re: fclean all
-
-#   @$(MAKE) -C $(LIBFT) clean
-#   @$(MAKE) -C $(LIBFT) fclean
-#   @$(MAKE) -C $(LIBFT)
