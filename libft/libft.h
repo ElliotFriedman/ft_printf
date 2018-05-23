@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 17:02:44 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 10:39:46 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 17:42:31 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct	s_data
 {
 	int			negative;
 	int			precision;
-	int			precheck;	
+	int			precheck;
 	int			plus;
 	int			hash;
 	int			sum;
@@ -40,13 +40,14 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+void			init(t_data *curr);
 char			*upper(char *print);
 char			*make_pre(t_data *curr, char *print);
 char			*make_pad(t_data *curr, char *print);
 char			*prep_x(char *print, char *prep);
 int				find_len(const char *str);
-int             ft_matoi(const char *str);
-void            ft_mputstr(char *str, t_data *curr);
+int				ft_matoi(const char *str);
+void			ft_mputstr(char *str, t_data *curr);
 void			*ft_memchr(const void *s, int c, size_t n);
 void			ft_putnbr_fd(int n, int fd);
 void			ft_striter(char *s, void (*f)(char *));

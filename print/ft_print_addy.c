@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:59:59 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/15 22:50:21 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 17:28:02 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,7 @@ char	*pad(char *print, t_data *curr)
 {
 	char	*snew;
 	int		len;
-	/*
-	 *
-	 * This function checks to see if
-	 * we can create any padding on
-	 * the string.
-	 *
-	 */
+	
 	if ((int)ft_strlen(print) < curr->pad)
 	{
 		len = (curr->pad - (int)ft_strlen(print)) + 2;
@@ -41,6 +35,7 @@ int		print_addy(t_data *curr, va_list list)
 	char				*print;
 	unsigned long long	stor;
 
+	ft_strncpy(curr->mod, "ll", 2);
 	stor = uint_flags(curr, list);
 	if (!stor && curr->precheck && !curr->pad && !curr->precision)
 		return (hexgen("0x", 0, curr));

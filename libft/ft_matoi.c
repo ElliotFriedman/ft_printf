@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 10:23:18 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 10:23:45 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 17:40:15 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static char	*ft_clr_whitespace(const char *str)
 	int x;
 
 	x = find_len(str);
-	while ((!ft_isdigit(*str) || *str == '0') && *str != '.' && *str != '\n' && *str && x)
+	while ((!ft_isdigit(*str) || *str == '0')
+			&& *str != '.' && *str != '\n' && *str && x)
 	{
 		x--;
 		str++;
@@ -30,7 +31,7 @@ int			ft_matoi(const char *str)
 	int					i;
 	int					isneg;
 	int long long		nbr;
-	
+
 	i = 0;
 	nbr = 0;
 	isneg = 0;

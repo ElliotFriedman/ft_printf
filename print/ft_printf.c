@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:23:10 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 09:59:59 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 17:35:59 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,9 @@
 int		find(char c, va_list list, t_data *curr)
 {
 	if (c == 'O' || c == 'o')
-	{
-		if (c == 'O')
-			ft_strncpy(curr->mod, "l", 1);
-		return (print_octal(curr, list));
-	}
+		return (print_octal(c, curr, list));
 	else if (c == 'U' || c == 'u')
-	{
-		if (c == 'U')
-			ft_strncpy(curr->mod, "ll", 2);
-		return (print_uint(curr, list));
-	}
+		return (print_uint(c, curr, list));
 	else if (c == 'd' || c == 'i' || c == 'D')
 	{
 		if (c == 'D')
@@ -43,10 +35,7 @@ int		find(char c, va_list list, t_data *curr)
 	else if (c == 'x' || c == 'X')
 		return (print_hex(c, curr, list));
 	else if (c == 'p')
-	{
-		ft_strncpy(curr->mod, "ll", 2);
 		return (print_addy(curr, list));
-	}
 	return (0);
 }
 
@@ -87,22 +76,6 @@ int		ft_putstr_until(const char *str, t_data *curr)
 	return (i);
 }
 
-void	init(t_data *curr)
-{
-	curr->plus = 0;
-	curr->precheck = 0;
-	curr->precision = 0;
-	curr->hash = 0;
-	curr->upper = 0;
-	curr->pad = 0;
-	curr->chrfil = 0;
-	curr->lr = 0;
-	curr->len = 0;
-	curr->negative = 0;
-	curr->chk = 0;
-	ft_bzero(curr->mod, 2);
-}
-
 int		ft_printf(const char *str, ...)
 {
 	va_list	list;
@@ -124,7 +97,7 @@ int		ft_printf(const char *str, ...)
 		if (curr->sum == (int)ft_strlen(str))
 			break;
 		curr->sum++;
-		init(curr);
+		ft_bzero(curr, sizeof(curr));
 	}
 	tmp = curr->iter;
 	free(curr);

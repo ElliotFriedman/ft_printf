@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 10:34:54 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 10:35:00 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 17:44:10 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*make_pad(t_data *curr, char *print)
 	tmp = print;
 	snew = ft_memalloc(1 + curr->pad - ft_strlen(print));
 	if (curr->hash)
-		ft_memset(snew, curr->chrfil, (curr->pad - 2 ) - ft_strlen(print));
+		ft_memset(snew, curr->chrfil, (curr->pad - 2) - ft_strlen(print));
 	else
 		ft_memset(snew, curr->chrfil, curr->pad - ft_strlen(print));
 	print = ft_strjoin(snew, print);

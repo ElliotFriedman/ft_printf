@@ -6,28 +6,11 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 21:40:30 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/20 18:48:43 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 17:31:20 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-int		find_len(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == 'd' || str[i] == 'D' || str[i] == 'x' || str[i] == 'X'
-				|| str[i] == 's' || str[i] == 'S' || str[i] == 'c' || str[i] == 'C'
-				|| str[i] == 'p' || str[i] == 'i' || str[i] == 'O' || str[i] == 'o'
-				|| str[i] == 'u' || str[i] == 'U')
-			return (i);
-		i++;
-	}
-	return (0);
-}
 
 int		hexgen2(char *print, char *snew, t_data *curr)
 {
@@ -59,7 +42,7 @@ int		hexgen2(char *print, char *snew, t_data *curr)
  *
  */
 
-int		print_octal(t_data *curr, va_list list)
+int		print_octal(char c, t_data *curr, va_list list)
 {
 	char				*print;
 	char				*snew;
@@ -68,6 +51,8 @@ int		print_octal(t_data *curr, va_list list)
 
 	i = 0;
 	snew = 0;
+	if (c == 'O')
+		ft_strncpy(curr->mod, "l", 1);
 	stor = uint_flags(curr, list);
 	if (curr->lr && curr->chrfil == 48)
 		curr->chrfil = 32;

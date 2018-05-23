@@ -6,19 +6,21 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:06:50 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 17:10:01 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 17:34:46 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int						print_uint(t_data *curr, va_list list)
+int						print_uint(char c, t_data *curr, va_list list)
 {
 	unsigned  long long	nbr;
 	char				*print;
 	char				*buf;
 
 	buf = 0;
+	if (c == 'U')
+		ft_strncpy(curr->mod, "ll", 2);
 	nbr = uint_flags(curr, list);
 	if (curr->precheck)
 		curr->chrfil = 32;

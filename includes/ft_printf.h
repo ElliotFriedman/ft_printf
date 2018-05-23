@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:40:29 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 10:30:31 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 17:34:16 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,17 @@ int				print_wchar(t_data *curr, va_list list);
 int				print_wstr(t_data *curr, va_list list);
 char			*new_data(char *print, t_data *curr);
 int				empty(t_data *curr);
-char			*prep_x(char *print, char *prep);
-char			*make_pad(t_data *curr, char *print);
-char			*make_pre(t_data *curr, char *print);
 int				ft_printf(const char *str, ...);
 char				*ft_itoabase(long long nbr, int base);
 char				*ft_uitoabase(unsigned long long nbr, int base);
-//int				ft_matoi(const char *str);
 void				find_flags(t_data *curr, const char *str);
 long long			nint_flags(t_data *curr, va_list list);
 unsigned long long		uint_flags(t_data *curr, va_list list);
 int				print_char(t_data *curr, va_list list);
 int				print_str(t_data *curr, va_list list);
-int				print_octal(t_data *curr, va_list list);
+int				print_octal(char c, t_data *curr, va_list list);
 int				print_int(t_data *curr, va_list list);
-int				print_uint(t_data *curr, va_list list);
+int				print_uint(char c, t_data *curr, va_list list);
 int				print_hex(char c, t_data *curr, va_list list);
 int				find_len(const char *str);
 void			ft_mputstr(char *str, t_data *curr);

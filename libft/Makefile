@@ -78,7 +78,9 @@ SRC = ft_atoi.c \
 	  ft_prep_x.c \
 	  ft_make_pad.c \
 	  ft_make_pre.c \
-	  ft_upper.c
+	  ft_upper.c \
+	  ft_findlen.c \
+	  ft_init.c
 
 
 OBJ = $(SRC:.c=.o)

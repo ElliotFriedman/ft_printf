@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_findlen.c                                       :+:      :+:    :+:   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/22 10:29:01 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 17:39:02 by efriedma         ###   ########.fr       */
+/*   Created: 2018/05/22 17:18:06 by efriedma          #+#    #+#             */
+/*   Updated: 2018/05/22 17:18:15 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		find_len(const char *s)
+void	init(t_data *curr)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == 'd' || s[i] == 'D' || s[i] == 'x' || s[i] == 'X'
-				|| s[i] == 's' || s[i] == 'S' || s[i] == 'c' || s[i] == 'C'
-				|| s[i] == 'p' || s[i] == 'i' || s[i] == 'O' || s[i] == 'o'
-				|| s[i] == 'u' || s[i] == 'U')
-			return (i);
-		i++;
-	}
-	return (0);
+	curr->plus = 0;
+	curr->precheck = 0;
+	curr->precision = 0;
+	curr->hash = 0;
+	curr->upper = 0;
+	curr->pad = 0;
+	curr->chrfil = 0;
+	curr->lr = 0;
+	curr->len = 0;
+	curr->negative = 0;
+	curr->chk = 0;
+	ft_bzero(curr->mod, 2);
 }

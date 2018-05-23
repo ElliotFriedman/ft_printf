@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:26:40 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 10:40:52 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 17:13:12 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,50 +28,6 @@ int		hexgen(char *print, char *snew, t_data *curr)
 		ft_mputstr(print, curr);
 	return (1);
 }
-/*
-char	*make_pre(t_data *curr, char *print)
-{
-	char	*tmp;
-	char	*snew;
-
-	tmp = print;
-	snew = ft_memalloc(curr->precision - ft_strlen(print) + 1);
-	ft_memset(snew, 48, curr->precision - ft_strlen(print));
-	print = ft_strjoin(snew, print);
-	ft_memdel((void**)&snew);
-	ft_memdel((void**)&tmp);
-	return (print);
-}
-
-char	*make_pad(t_data *curr, char *print)
-{
-	char	*snew;
-	char	*tmp;
-
-	tmp = print;
-	snew = ft_memalloc(1 + curr->pad - ft_strlen(print));
-	if (curr->hash)
-		ft_memset(snew, curr->chrfil, (curr->pad - 2 ) - ft_strlen(print));
-	else
-		ft_memset(snew, curr->chrfil, curr->pad - ft_strlen(print));
-	print = ft_strjoin(snew, print);
-	ft_memdel((void**)&tmp);
-	ft_memdel((void**)&snew);
-	return (print);
-}
-*/
-
-/*
-char	*prep_x(char *print, char *prep)
-{
-	char	*tmp;
-
-	tmp = print;
-	print = ft_strjoin(prep, print);
-	ft_memdel((void**)&tmp);
-	return (print);
-}
-*/
 
 int		empty(t_data *curr)
 {
@@ -88,20 +44,6 @@ int		empty(t_data *curr)
 	ft_memdel((void*)&snew);
 	return (1);
 }
-/*
-char	*upper(char *print)
-{
-	int	i;
-
-	i = 0;
-	while (print[i])
-	{
-		print[i] = ft_toupper(print[i]);
-		i++;
-	}
-	return (print);
-}
-*/
 
 char	*new_data(char *print, t_data *curr)
 {
