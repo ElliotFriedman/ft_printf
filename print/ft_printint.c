@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:06:50 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 17:06:42 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 17:10:01 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int						print_uint(t_data *curr, va_list list)
 	return (hexgen(print, buf, curr));
 }
 
-void					handle_0(t_data *curr)
+int						handle_0(t_data *curr)
 {
 	ft_mputstr("0", curr);
 	curr->pad--;
@@ -48,7 +48,7 @@ void					handle_0(t_data *curr)
 	return (1);
 }
 
-void					handle_neg(t_data *curr, int *nbr)
+void					handle_neg(t_data *curr, long long *nbr)
 {
 	curr->plus = 0;
 	curr->negative = 1;
@@ -57,7 +57,7 @@ void					handle_neg(t_data *curr, int *nbr)
 		curr->pad--;
 }
 
-int						edgec(t_data *curr)
+int						edgec(t_data *curr, char *print)
 {
 		curr->pad--;
 		print = make_pad(curr, print);
@@ -88,7 +88,7 @@ int						print_int(t_data *curr, va_list list)
 	if (nbr < 0)
 		handle_neg(curr, &nbr);
 	print = ft_itoabase(nbr, 10);
-	if (!nbr && curr->chk && curr->pad && curr->chrfil == 48 && edgec(curr))
+	if (!nbr && curr->chk && curr->pad && curr->chrfil == 48 && edgec(curr, print))
 		return (hexgen(print, buf, curr));
 	if (curr->precheck && curr->precision > (int)ft_strlen(print))
 		print = make_pre(curr, print);
