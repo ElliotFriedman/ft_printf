@@ -80,7 +80,13 @@ SRC = ft_atoi.c \
 	  ft_make_pre.c \
 	  ft_upper.c \
 	  ft_findlen.c \
-	  ft_init.c
+	  ft_init.c \
+	  ft_wstrdup.c \
+	  ft_wputstr.c \
+	  ft_putwchar.c \
+	  ft_nwputstr.c \
+	  ft_wstrlen.c \
+
 
 
 OBJ = $(SRC:.c=.o)

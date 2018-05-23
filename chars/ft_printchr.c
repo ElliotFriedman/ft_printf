@@ -6,24 +6,11 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 21:20:23 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 21:59:32 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/23 14:26:20 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-void	ft_nputstr(char *str, t_data *curr, int i)
-{
-	int	x;
-
-	x = 0;
-	while (str[x] && x < i)
-	{
-		write(1, &str[x], 1);
-		curr->iter++;
-		x++;
-	}
-}
 
 int		print_char(t_data *curr, va_list list)
 {
@@ -90,12 +77,14 @@ int		handle_pre(t_data *curr, char *str)
 	{
 		ft_nputstr(str, curr, curr->precision);
 		ft_prints(curr);
+		ft_memdel((void**)&str);
 		return (1);
 	}
 	else if (!curr->lr && curr->precheck)
 	{
 		ft_prints(curr);
 		ft_nputstr(str, curr, curr->precision);
+		ft_memdel((void**)&str);
 		return (1);
 	}
 	return (0);

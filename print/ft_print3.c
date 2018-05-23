@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:26:40 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 21:18:57 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/23 00:30:30 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ int		hexgen(char *print, char *snew, t_data *curr)
 	{
 		ft_mputstr(print, curr);
 		ft_mputstr(snew, curr);
-		ft_memdel((void*)&snew);
+		free(snew);
 	}
 	else if (snew)
 	{
 		ft_mputstr(snew, curr);
 		ft_mputstr(print, curr);
-		ft_memdel((void*)&snew);
+		free(snew);
 	}
 	else
 		ft_mputstr(print, curr);
-	ft_memdel((void*)&print);
+	free(print);
 	return (1);
 }
 

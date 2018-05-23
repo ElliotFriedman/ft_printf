@@ -6,39 +6,11 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 15:36:58 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 21:29:38 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/23 14:40:36 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-int		ft_wstrlen(wchar_t *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	ft_nwputstr(wchar_t *str, t_data *curr, int i)
-{
-	int	x;
-
-	x = 0;
-	while (str[x] && x < i)
-	{
-		write(1, &str[x], 1);
-		curr->iter++;
-		x++;
-	}
-}
-
-void	ft_putwchar(wchar_t c)
-{
-	write(1, &c, 1);
-}
 
 int		print_wchar(t_data *curr, va_list list)
 {
@@ -85,19 +57,6 @@ void	ft_wprints(t_data *curr)
 	}
 }
 
-void	ft_wputstr(wchar_t *str, t_data *curr)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		ft_putwchar(str[i]);
-		curr->iter++;
-		i++;
-	}
-}
-
 void	handle_woutput(t_data *curr, wchar_t *print)
 {
 	if (curr->lr)
@@ -110,24 +69,6 @@ void	handle_woutput(t_data *curr, wchar_t *print)
 		ft_wprints(curr);
 		ft_wputstr(print, curr);
 	}
-}
-
-wchar_t	*ft_wstrdup(const char *str)
-{
-	int		i;
-	wchar_t	*new;
-
-	i = ft_strlen(str);
-	new = ft_memalloc(sizeof(wchar_t) * i + 1);
-	if (!i)
-		return (0);
-	i = 0;
-	while (str[i])
-	{
-		new[i] = str[i];
-		i++;
-	}
-	return (new);
 }
 
 void	pre_print(t_data *curr, wchar_t *str)

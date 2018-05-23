@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mputstr.c                                       :+:      :+:    :+:   */
+/*   ft_wstrdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/05 18:10:16 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/23 14:23:37 by efriedma         ###   ########.fr       */
+/*   Created: 2018/05/23 14:27:22 by efriedma          #+#    #+#             */
+/*   Updated: 2018/05/23 14:27:30 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_nputstr(char *str, t_data *curr, int i)
+wchar_t	*ft_wstrdup(const char *str)
 {
-	int	x;
+	int		i;
+	wchar_t	*new;
 
-	x = 0;
-	while (str[x] && x < i)
-	{
-		write(1, &str[x], 1);
-		curr->iter++;
-		x++;
-	}
-}
-
-void	ft_mputstr(char *str, t_data *curr)
-{
-	size_t	i;
-
+	i = ft_strlen(str);
+	new = ft_memalloc(sizeof(wchar_t) * i + 1);
+	if (!i)
+		return (0);
 	i = 0;
-	if (str)
+	while (str[i])
 	{
-		i = 0;
-		while (str[i])
-		{
-			curr->iter++;
-			write(1, &str[i], 1);
-			i++;
-		}
+		new[i] = str[i];
+		i++;
 	}
+	return (new);
 }

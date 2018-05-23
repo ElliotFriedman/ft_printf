@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:40:29 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 21:33:25 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/23 14:25:17 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 int					print_wchar(t_data *curr, va_list list);
 int					print_wstr(t_data *curr, va_list list);
+void				ft_nputstr(char *str, t_data *curr, int precise);
 char				*new_data(char *print, t_data *curr);
 int					empty(t_data *curr);
 int					ft_printf(const char *str, ...);

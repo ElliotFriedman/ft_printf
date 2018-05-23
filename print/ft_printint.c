@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:06:50 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 20:55:50 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/23 13:51:40 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int			check(int long long *nbr, t_data *cur, char **p)
 	if (!cur->precision && cur->precheck && !nbr && cur->pad)
 		return (hexgen(new_data("", cur), 0, cur));
 	if (!nbr && cur->chk && cur->pad && cur->chrfil == 48 && edgec(cur, *p))
-		return (hexgen("0", 0, cur));
+		return (hexgen(ft_strdup("0"), 0, cur));
 	if (*nbr < 0)
 	{
 		cur->plus = 0;
@@ -119,6 +119,6 @@ int			print_int(t_data *cur, va_list list)
 	if (!cur->pad && !cur->precheck && cur->chk && !cur->plus)
 		print = prep_x(print, " ");
 	if (cur->pad && cur->precision && !cur->lr && cur->chk)
-		buf = prep_x(buf, " ");
+		ft_mputstr(" ", cur);
 	return (hexgen(print, buf, cur));
 }
