@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:06:50 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 16:20:59 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 17:06:42 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,35 @@ int						print_uint(t_data *curr, va_list list)
 	return (hexgen(print, buf, curr));
 }
 
+void					handle_0(t_data *curr)
+{
+	ft_mputstr("0", curr);
+	curr->pad--;
+	while (curr->pad)
+	{
+		ft_mputstr(" ", curr);
+		curr->pad--;
+	}
+	return (1);
+}
+
+void					handle_neg(t_data *curr, int *nbr)
+{
+	curr->plus = 0;
+	curr->negative = 1;
+	*nbr *= -1;
+	if ((curr->pad && curr->chrfil == 48) || (curr->chk && !curr->pad))
+		curr->pad--;
+}
+
+int						edgec(t_data *curr)
+{
+		curr->pad--;
+		print = make_pad(curr, print);
+		print = prep_x(print, " ");
+		return (1);
+}
+
 int						print_int(t_data *curr, va_list list)
 {
 	int long long		nbr;
@@ -44,9 +73,7 @@ int						print_int(t_data *curr, va_list list)
 
 	buf = 0;
 	nbr = nint_flags(curr, list);
-	if (curr->lr)
-		curr->chrfil = 32;
-	if (curr->precheck)
+	if (curr->precheck || curr->lr)
 		curr->chrfil = 32;
 	if ((curr->plus && curr->lr) || (curr->plus && !curr->pad))
 		curr->pad++;
@@ -55,34 +82,14 @@ int						print_int(t_data *curr, va_list list)
 	if (!nbr && curr->chrfil == 48 && curr->pad)
 		curr->pad--;
 	if (!curr->precheck && !nbr && curr->lr && curr->pad)
-	{
-		ft_mputstr("0", curr);
-		curr->pad--;
-		while (curr->pad)
-		{
-			ft_mputstr(" ", curr);
-			curr->pad--;
-		}
-		return (1);
-	}
+		return (handle_0(curr));
 	if (!curr->precision && curr->precheck && !nbr && curr->pad)
 		return (hexgen(new_data("", curr), 0, curr));
 	if (nbr < 0)
-	{
-		curr->plus = 0;
-		curr->negative = 1;
-		nbr *= -1;
-		if ((curr->pad && curr->chrfil == 48) || (curr->chk && !curr->pad))
-			curr->pad--;
-	}
+		handle_neg(curr, &nbr);
 	print = ft_itoabase(nbr, 10);
-	if (!nbr && curr->chk && curr->pad && curr->chrfil == 48)
-	{
-		curr->pad--;
-		print = make_pad(curr, print);
-		print = prep_x(print, " ");
+	if (!nbr && curr->chk && curr->pad && curr->chrfil == 48 && edgec(curr))
 		return (hexgen(print, buf, curr));
-	}
 	if (curr->precheck && curr->precision > (int)ft_strlen(print))
 		print = make_pre(curr, print);
 	if (curr->plus && !curr->negative && curr->chrfil == 32)
