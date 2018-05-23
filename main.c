@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 22:25:02 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 17:50:34 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 18:57:20 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,8 @@
 
 int main()
 {
-	printf("Lalalala, %d%% des gens qui parlent %C Ly adorent %s. Ou Presque. %d, %u, %X, %c\n", 100, L'à', "Ly", 2, 10, 10000, '\n', "ôHohoho");
-ft_printf("Lalalala, %d%% des gens qui parlent %C Ly adorent %s. Ou Presque. %d, %u, %X, %c\n", 100, L'à', "Ly", 2, 10, 10000, '\n', "ôHohoho");
-
-//	ft_printf("ft %%+04d 42 == %0+04d\n", 42);
-//	   printf("og %%+04d 42 == %0+04d\n", 42);
+	ft_printf("ft %%+04d 42 == %0+04d\n", 42);
+	   printf("og %%+04d 42 == %0+04d\n", 42);
 
 	/*	
 	ft_printf("%%04.3i 42 == |%04.3i|\n", 42);
