@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:06:50 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 19:24:14 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 19:37:38 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int						handle_0(t_data *curr)
 	return (1);
 }
 
+/*
 void					handle_neg(t_data *curr, long long *nbr)
 {
 	curr->plus = 0;
@@ -58,8 +59,9 @@ void					handle_neg(t_data *curr, long long *nbr)
 	if ((curr->pad && curr->chrfil == 48) || (curr->chk && !curr->pad))
 		curr->pad--;
 }
+*/
 
-int						edgec(t_data *curr, char *print)
+int			edgec(t_data *curr, char *print)
 {
 	curr->pad--;
 	print = make_pad(curr, print);
@@ -67,7 +69,7 @@ int						edgec(t_data *curr, char *print)
 	return (1);
 }
 
-int						err_check(int long long *nbr, t_data *cur, char *buf)
+int			check(int long long *nbr, t_data *cur, char *buf, char *p)
 {
 	if (cur->precheck || cur->lr)
 		cur->chrfil = 32;
@@ -84,34 +86,28 @@ int						err_check(int long long *nbr, t_data *cur, char *buf)
 	if (!nbr && cur->chk && cur->pad && cur->chrfil == 48 && edgec(cur, "0"))
 		return (hexgen("0", buf, cur));
 	if (*nbr < 0)
-		handle_neg(cur, nbr);
+	{
+		cur->plus = 0;
+		cur->negative = 1;
+		*nbr *= -1;
+		if ((cur->pad && cur->chrfil == 48) || (cur->chk && !cur->pad))
+			cur->pad--;
+	}
+	p = ft_itoabase(*nbr, 10);
 	return (0);
-
 }
 
-int						print_int(t_data *cur, va_list list)
+int			print_int(t_data *cur, va_list list)
 {
 	int long long		nbr;
 	char				*print;
 	char				*buf;
 
-	buf = 0;
+	(buf = 0) ? print = 0 : (print = 0);
+	print = 0;
 	nbr = nint_flags(cur, list);
-	if (err_check(&nbr, cur, buf))
+	if (check(&nbr, cur, buf, print))
 		return (1);
-//	if (!cur->precision && cur->precheck && !nbr && !cur->pad)
-//		return (1);
-//	if (!nbr && cur->chrfil == 48 && cur->pad)
-//		cur->pad--;
-//	if (!cur->precheck && !nbr && cur->lr && cur->pad)
-//		return (handle_0(cur));
-//	if (!cur->precision && cur->precheck && !nbr && cur->pad)
-//		return (hexgen(new_data("", cur), 0, cur));
-//	if (nbr < 0)
-//		handle_neg(cur, &nbr);
-	print = ft_itoabase(nbr, 10);
-//	if (!nbr && cur->chk && cur->pad && cur->chrfil == 48 && edgec(cur, print))
-//		return (hexgen(print, buf, cur));
 	if (cur->precheck && cur->precision > (int)ft_strlen(print))
 		print = make_pre(cur, print);
 	if (cur->plus && !cur->negative && cur->chrfil == 32)
