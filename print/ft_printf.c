@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:23:10 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 17:35:59 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 17:55:06 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		ft_printf(const char *str, ...)
 		if (curr->sum == (int)ft_strlen(str))
 			break;
 		curr->sum++;
-		ft_bzero(curr, sizeof(curr));
+		init(curr);
 	}
 	tmp = curr->iter;
 	free(curr);
