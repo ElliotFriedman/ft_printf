@@ -6,13 +6,13 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:06:50 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 19:37:38 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 20:55:50 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int						print_uint(char c, t_data *curr, va_list list)
+int			print_uint(char c, t_data *curr, va_list list)
 {
 	unsigned long long	nbr;
 	char				*print;
@@ -38,38 +38,36 @@ int						print_uint(char c, t_data *curr, va_list list)
 	return (hexgen(print, buf, curr));
 }
 
-int						handle_0(t_data *curr)
+int			handle_0(t_data *curr, char **a, char **b, int on)
 {
-	ft_mputstr("0", curr);
-	curr->pad--;
-	while (curr->pad)
+	if (on)
 	{
-		ft_mputstr(" ", curr);
+		ft_mputstr("0", curr);
 		curr->pad--;
+		while (curr->pad)
+		{
+			ft_mputstr(" ", curr);
+			curr->pad--;
+		}
+	}
+	else
+	{
+		*a = 0;
+		*b = 0;
 	}
 	return (1);
 }
 
-/*
-void					handle_neg(t_data *curr, long long *nbr)
-{
-	curr->plus = 0;
-	curr->negative = 1;
-	*nbr *= -1;
-	if ((curr->pad && curr->chrfil == 48) || (curr->chk && !curr->pad))
-		curr->pad--;
-}
-*/
-
 int			edgec(t_data *curr, char *print)
 {
+	print = ft_memalloc(2);
 	curr->pad--;
 	print = make_pad(curr, print);
 	print = prep_x(print, " ");
 	return (1);
 }
 
-int			check(int long long *nbr, t_data *cur, char *buf, char *p)
+int			check(int long long *nbr, t_data *cur, char **p)
 {
 	if (cur->precheck || cur->lr)
 		cur->chrfil = 32;
@@ -80,11 +78,11 @@ int			check(int long long *nbr, t_data *cur, char *buf, char *p)
 	if (!nbr && cur->chrfil == 48 && cur->pad)
 		cur->pad--;
 	if (!cur->precheck && !nbr && cur->lr && cur->pad)
-		return (handle_0(cur));
+		return (handle_0(cur, 0, 0, 1));
 	if (!cur->precision && cur->precheck && !nbr && cur->pad)
 		return (hexgen(new_data("", cur), 0, cur));
-	if (!nbr && cur->chk && cur->pad && cur->chrfil == 48 && edgec(cur, "0"))
-		return (hexgen("0", buf, cur));
+	if (!nbr && cur->chk && cur->pad && cur->chrfil == 48 && edgec(cur, *p))
+		return (hexgen("0", 0, cur));
 	if (*nbr < 0)
 	{
 		cur->plus = 0;
@@ -93,7 +91,7 @@ int			check(int long long *nbr, t_data *cur, char *buf, char *p)
 		if ((cur->pad && cur->chrfil == 48) || (cur->chk && !cur->pad))
 			cur->pad--;
 	}
-	p = ft_itoabase(*nbr, 10);
+	*p = ft_itoabase(*nbr, 10);
 	return (0);
 }
 
@@ -103,10 +101,8 @@ int			print_int(t_data *cur, va_list list)
 	char				*print;
 	char				*buf;
 
-	(buf = 0) ? print = 0 : (print = 0);
-	print = 0;
 	nbr = nint_flags(cur, list);
-	if (check(&nbr, cur, buf, print))
+	if (handle_0(cur, &buf, &print, 0) && check(&nbr, cur, &print))
 		return (1);
 	if (cur->precheck && cur->precision > (int)ft_strlen(print))
 		print = make_pre(cur, print);

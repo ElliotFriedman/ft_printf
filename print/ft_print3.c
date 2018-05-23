@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:26:40 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 18:48:41 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 21:18:57 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,17 @@ int		hexgen(char *print, char *snew, t_data *curr)
 	{
 		ft_mputstr(print, curr);
 		ft_mputstr(snew, curr);
+		ft_memdel((void*)&snew);
 	}
 	else if (snew)
 	{
 		ft_mputstr(snew, curr);
 		ft_mputstr(print, curr);
+		ft_memdel((void*)&snew);
 	}
 	else
 		ft_mputstr(print, curr);
+	ft_memdel((void*)&print);
 	return (1);
 }
 
@@ -41,7 +44,6 @@ int		empty(t_data *curr)
 	snew = ft_memalloc(x + 1);
 	ft_memset(snew, 32, x);
 	hexgen(snew, 0, curr);
-	ft_memdel((void*)&snew);
 	return (1);
 }
 

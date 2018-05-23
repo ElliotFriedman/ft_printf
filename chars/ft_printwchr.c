@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 15:36:58 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 10:17:18 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 21:29:38 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,11 @@ int		print_wchar(t_data *curr, va_list list)
 	return (1);
 }
 
-
 void	ft_wprints(t_data *curr)
 {
 	if (curr->chrfil == 32)
 		while (curr->pad > 0)
-		{	
+		{
 			ft_mputstr(" ", curr);
 			curr->pad--;
 		}
@@ -86,17 +85,17 @@ void	ft_wprints(t_data *curr)
 	}
 }
 
-void    ft_wputstr(wchar_t *str, t_data *curr)
+void	ft_wputstr(wchar_t *str, t_data *curr)
 {
-		int i;
+	int	i;
 
-		i = 0;
-		while (str[i])
-		{
-			ft_putwchar(str[i]);
-			curr->iter++;
-			i++;
-		}
+	i = 0;
+	while (str[i])
+	{
+		ft_putwchar(str[i]);
+		curr->iter++;
+		i++;
+	}
 }
 
 void	handle_woutput(t_data *curr, wchar_t *print)
@@ -131,23 +130,8 @@ wchar_t	*ft_wstrdup(const char *str)
 	return (new);
 }
 
-int		print_wstr(t_data *curr, va_list list)
+void	pre_print(t_data *curr, wchar_t *str)
 {
-	wchar_t *str;
-
-	ft_bzero(curr->mod, 2);
-	str = va_arg(list, wchar_t *);
-	if (!str)
-		str = ft_wstrdup("(null)");
-	if (!curr->precheck)
-		curr->pad -= (int)ft_wstrlen(str);
-	else
-	{
-		if ((int)ft_wstrlen(str) > curr->precision)
-			curr->pad -= curr->precision;
-		else
-			curr->pad -= (int)ft_wstrlen(str);
-	}
 	if (curr->lr && curr->precheck)
 	{
 		ft_nwputstr(str, curr, curr->precision);
@@ -158,6 +142,25 @@ int		print_wstr(t_data *curr, va_list list)
 		ft_wprints(curr);
 		ft_nwputstr(str, curr, curr->precision);
 	}
+}
+
+int		print_wstr(t_data *curr, va_list list)
+{
+	wchar_t *str;
+
+	if (!(str = va_arg(list, wchar_t *)))
+		str = ft_wstrdup("(null)");
+	if (!curr->precheck)
+		curr->pad -= (int)ft_wstrlen(str);
+	else
+	{
+		if ((int)ft_wstrlen(str) > curr->precision)
+			curr->pad -= curr->precision;
+		else
+			curr->pad -= (int)ft_wstrlen(str);
+	}
+	if (curr->precheck)
+		pre_print(curr, str);
 	else if ((!curr->lr && !curr->precheck) || (curr->lr && !curr->precheck))
 		handle_woutput(curr, str);
 	return (1);
