@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 21:03:32 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 17:12:33 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 18:49:35 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		outgen2(char *print, t_data *curr)
 {
 	char	*buf;
-	
+
 	if (curr->pad > (int)ft_strlen(print))
 	{
 		buf = ft_memalloc(curr->pad - ft_strlen(print));

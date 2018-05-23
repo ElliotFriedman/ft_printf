@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 21:46:02 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 18:46:29 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 18:47:42 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,7 @@ void	find_flags(t_data *curr, const char *str)
 		if (str[i] == '+')
 			curr->plus = 1;
 		if (str[i] == ' ' && ((curr->chk = 1)))
-		{
-		//	curr->chk = 1;
 			curr->chrfil = 32;
-		}
 		i++;
 	}
 	if (curr->chrfil != 48)

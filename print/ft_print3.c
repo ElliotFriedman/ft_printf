@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:26:40 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 17:13:12 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 18:48:41 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		hexgen(char *print, char *snew, t_data *curr)
 
 int		empty(t_data *curr)
 {
-	char 	*snew;
+	char	*snew;
 	int		x;
 
 	if (curr->precision > curr->pad)
