@@ -6,46 +6,18 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 22:49:16 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/16 23:00:36 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 19:06:00 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-
-/*
- *
- * Should be able to handle any base
- * only needs to work for 8 and 16
- *	
- *			ctr		binary representation
- *  4/2		 1
- *  2/2		 2
- *  1/2		 3			100
- *	
- *					base 10 rep
- *  100/10	 1
- *  10/10	 2
- *  1/10	 3			100
- *
- *					base 16 rep
- *  100/16	 1
- *  6.25/16	 2			64
- */
-
-
-/*
- * figure this out in base form
- * how many bytes need to be allocated for a base x string
- * with number y
- */
 
 char	u_set(int nbr, int cnt)
 {
 	if (nbr < 0 && !cnt)
 	{
 		cnt++;
-		return '-';
+		return ('-');
 	}
 	if (nbr >= 10)
 		return ('a' - 10 + nbr);
@@ -70,11 +42,11 @@ int		u_numlen(unsigned long long nbr, int base)
 	return (len);
 }
 
-char 	*ft_uitoabase(unsigned long long nbr, int base)
+char	*ft_uitoabase(unsigned long long nbr, int base)
 {
-	char	*str;
-	int		i;
-	int		x;
+	char		*str;
+	int			i;
+	int			x;
 	static int	cnt;
 
 	cnt = 0;

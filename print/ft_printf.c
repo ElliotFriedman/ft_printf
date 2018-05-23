@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:23:10 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 17:55:06 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 19:04:12 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		ft_printf(const char *str, ...)
 {
 	va_list	list;
 	t_data	*curr;
-	int	tmp;
+	int		tmp;
 
 	curr = ft_memalloc(sizeof(t_data));
 	va_start(list, str);
@@ -95,7 +95,7 @@ int		ft_printf(const char *str, ...)
 				print_per(curr);
 		}
 		if (curr->sum == (int)ft_strlen(str))
-			break;
+			break ;
 		curr->sum++;
 		init(curr);
 	}

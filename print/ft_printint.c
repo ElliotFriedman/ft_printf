@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:06:50 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 17:34:46 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 19:24:14 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int						print_uint(char c, t_data *curr, va_list list)
 {
-	unsigned  long long	nbr;
+	unsigned long long	nbr;
 	char				*print;
 	char				*buf;
 
@@ -61,52 +61,72 @@ void					handle_neg(t_data *curr, long long *nbr)
 
 int						edgec(t_data *curr, char *print)
 {
-		curr->pad--;
-		print = make_pad(curr, print);
-		print = prep_x(print, " ");
-		return (1);
+	curr->pad--;
+	print = make_pad(curr, print);
+	print = prep_x(print, " ");
+	return (1);
 }
 
-int						print_int(t_data *curr, va_list list)
+int						err_check(int long long *nbr, t_data *cur, char *buf)
+{
+	if (cur->precheck || cur->lr)
+		cur->chrfil = 32;
+	if ((cur->plus && cur->lr) || (cur->plus && !cur->pad))
+		cur->pad++;
+	if (!cur->precision && cur->precheck && !nbr && !cur->pad)
+		return (1);
+	if (!nbr && cur->chrfil == 48 && cur->pad)
+		cur->pad--;
+	if (!cur->precheck && !nbr && cur->lr && cur->pad)
+		return (handle_0(cur));
+	if (!cur->precision && cur->precheck && !nbr && cur->pad)
+		return (hexgen(new_data("", cur), 0, cur));
+	if (!nbr && cur->chk && cur->pad && cur->chrfil == 48 && edgec(cur, "0"))
+		return (hexgen("0", buf, cur));
+	if (*nbr < 0)
+		handle_neg(cur, nbr);
+	return (0);
+
+}
+
+int						print_int(t_data *cur, va_list list)
 {
 	int long long		nbr;
 	char				*print;
 	char				*buf;
 
 	buf = 0;
-	nbr = nint_flags(curr, list);
-	if (curr->precheck || curr->lr)
-		curr->chrfil = 32;
-	if ((curr->plus && curr->lr) || (curr->plus && !curr->pad))
-		curr->pad++;
-	if (!curr->precision && curr->precheck && !nbr && !curr->pad)
+	nbr = nint_flags(cur, list);
+	if (err_check(&nbr, cur, buf))
 		return (1);
-	if (!nbr && curr->chrfil == 48 && curr->pad)
-		curr->pad--;
-	if (!curr->precheck && !nbr && curr->lr && curr->pad)
-		return (handle_0(curr));
-	if (!curr->precision && curr->precheck && !nbr && curr->pad)
-		return (hexgen(new_data("", curr), 0, curr));
-	if (nbr < 0)
-		handle_neg(curr, &nbr);
+//	if (!cur->precision && cur->precheck && !nbr && !cur->pad)
+//		return (1);
+//	if (!nbr && cur->chrfil == 48 && cur->pad)
+//		cur->pad--;
+//	if (!cur->precheck && !nbr && cur->lr && cur->pad)
+//		return (handle_0(cur));
+//	if (!cur->precision && cur->precheck && !nbr && cur->pad)
+//		return (hexgen(new_data("", cur), 0, cur));
+//	if (nbr < 0)
+//		handle_neg(cur, &nbr);
 	print = ft_itoabase(nbr, 10);
-	if (!nbr && curr->chk && curr->pad && curr->chrfil == 48 && edgec(curr, print))
-		return (hexgen(print, buf, curr));
-	if (curr->precheck && curr->precision > (int)ft_strlen(print))
-		print = make_pre(curr, print);
-	if (curr->plus && !curr->negative && curr->chrfil == 32)
+//	if (!nbr && cur->chk && cur->pad && cur->chrfil == 48 && edgec(cur, print))
+//		return (hexgen(print, buf, cur));
+	if (cur->precheck && cur->precision > (int)ft_strlen(print))
+		print = make_pre(cur, print);
+	if (cur->plus && !cur->negative && cur->chrfil == 32)
 		print = prep_x(print, "+");
-	else if (curr->negative && curr->chrfil != 48)
+	else if (cur->negative && cur->chrfil != 48)
 		print = prep_x(print, "-");
-	if ((int)ft_strlen(print) < curr->pad)
-		buf = new_data(print, curr);
-	if (curr->chrfil == 48 && !curr->lr && curr->negative)
+	if ((int)ft_strlen(print) < cur->pad)
+		buf = new_data(print, cur);
+	if (cur->chrfil == 48 && !cur->lr && cur->negative)
 		buf = prep_x(buf, "-");
-	if (curr->plus && curr->chrfil == 48)
+	if (cur->plus && cur->chrfil == 48)
 		buf = prep_x(buf, "+");
-	if (!curr->pad && !curr->precheck && curr->chk && !curr->plus)
+	if (!cur->pad && !cur->precheck && cur->chk && !cur->plus)
 		print = prep_x(print, " ");
-	if (curr->pad && curr->precision && !curr->lr && curr->chk)
+	if (cur->pad && cur->precision && !cur->lr && cur->chk)
 		buf = prep_x(buf, " ");
-	return (hexgen(print, buf, curr));
+	return (hexgen(print, buf, cur));
 }

@@ -6,13 +6,13 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 21:03:32 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 18:49:35 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 19:01:10 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		outgen2(char *print, t_data *curr)
+int			outgen2(char *print, t_data *curr)
 {
 	char	*buf;
 
@@ -48,7 +48,7 @@ char		*help(char *tmp, char *print)
 	return (print);
 }
 
-int		print_per(t_data *curr)
+int			print_per(t_data *curr)
 {
 	char	*str;
 
