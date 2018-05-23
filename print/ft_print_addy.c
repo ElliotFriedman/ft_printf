@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:59:59 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 17:28:02 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 18:43:29 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*pad(char *print, t_data *curr)
 {
 	char	*snew;
 	int		len;
-	
+
 	if ((int)ft_strlen(print) < curr->pad)
 	{
 		len = (curr->pad - (int)ft_strlen(print)) + 2;

@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 21:46:02 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/21 18:56:23 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/22 18:46:29 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	find_width_precision(t_data *curr, const char *str)
 	curr->pad = ft_matoi(str);
 	while (str[i] && ft_isdigit(str[i]))
 		i++;
-	while (str[i] && str[i] != '.' && str[i] != 'l' && str[i] != 'h' && str[i] != 'z'
-			&& str[i] != 'U' && str[i] != 'u'
+	while (str[i] && str[i] != '.' && str[i] != 'l' && str[i] != 'h'
+			&& str[i] != 'z' && str[i] != 'U' && str[i] != 'u'
 			&& str[i] != 'j' && str[i] != 'd' && str[i] != 'D' && str[i] != 'i'
 			&& str[i] != 'o' && str[i] != 'O' && str[i] != 'x' && str[i] != 'X'
 			&& str[i] != 'p' && str[i] != 's' && str[i] != 'S' && str[i] != 'c')
@@ -57,9 +57,7 @@ void	find_width_precision(t_data *curr, const char *str)
 void	find_flags(t_data *curr, const char *str)
 {
 	int	i;
-	//	int	x;
 
-	//	x = find_len(str);
 	i = 0;
 	while (str[i] && str[i] != '.' && str[i] != 'u' && str[i] != 'U'
 			&& str[i] != 'j' && str[i] != 'd' && str[i] != 'D' && str[i] != 'i'
@@ -75,9 +73,9 @@ void	find_flags(t_data *curr, const char *str)
 			curr->lr = 1;
 		if (str[i] == '+')
 			curr->plus = 1;
-		if (str[i] == ' ')
+		if (str[i] == ' ' && ((curr->chk = 1)))
 		{
-			curr->chk = 1;
+		//	curr->chk = 1;
 			curr->chrfil = 32;
 		}
 		i++;
