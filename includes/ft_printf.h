@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:40:29 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/23 17:30:30 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/23 17:32:28 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
-# include <stdio.h>
 # include <wchar.h>
 
 int					print_wchar(t_data *curr, va_list list);
