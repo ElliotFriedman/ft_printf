@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_findlen.c                                       :+:      :+:    :+:   */
+/*   ft_malset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/22 10:29:01 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/24 12:50:03 by efriedma         ###   ########.fr       */
+/*   Created: 2018/05/23 22:58:43 by efriedma          #+#    #+#             */
+/*   Updated: 2018/05/24 11:49:07 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		find_len(const char *s)
+char	*ft_malset(int size, char set)
 {
-	int	i;
+	char *trg;
 
-	i = 0;
-	while (s[i])
+	trg = 0;
+	if (size > 0)
 	{
-		if (s[i] == 'd' || s[i] == 'D' || s[i] == 'x' || s[i] == 'X'
-				|| s[i] == 's' || s[i] == 'S' || s[i] == 'c' || s[i] == 'C'
-				|| s[i] == 'p' || s[i] == 'i' || s[i] == 'O' || s[i] == 'o'
-				|| s[i] == 'u' || s[i] == 'U' || s[i] == 'b')
-			return (i);
-		i++;
+		trg = ft_memalloc(size + 1);
+		ft_memset(trg, set, size);
 	}
-	return (0);
+	return (trg);
 }

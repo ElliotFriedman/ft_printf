@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:59:59 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 18:43:29 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/24 12:52:57 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,39 @@ int		print_addy(t_data *curr, va_list list)
 	ft_memdel((void*)&tmp);
 	snew = pad(print, curr);
 	return (hexgen(print, snew, curr));
+}
+
+void	handle_b(t_data *cur, int long long *nbr, char **buf)
+{
+	if (*nbr < 0)
+	{
+		cur->plus = 0;
+		cur->negative = 1;
+		*nbr *= -1;
+		if (cur->precision > 0)
+			cur->precision--;
+	}
+	*buf = 0;
+}
+
+int		print_binary(t_data *cur, va_list list)
+{
+	int long long	nbr;
+	char			*print;
+	char			*buf;
+
+	nbr = nint_flags(cur, list);
+	handle_b(cur, &nbr, &buf);
+	print = ft_itoabase(nbr, 2);
+	if (cur->precision > (int)ft_strlen(print))
+		print = make_pre(cur, print);
+	if (cur->pad > (int)ft_strlen(print))
+		buf = ft_malset(cur->pad - ft_strlen(print), cur->chrfil);
+	if (cur->plus && !cur->negative)
+		print = prep_x(print, "+");
+	if (cur->negative)
+		print = prep_x(print, "-");
+	if (cur->chk && !cur->lr)
+		ft_mputstr(" ", cur);
+	return (hexgen(print, buf, cur));
 }

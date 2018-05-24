@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 21:46:02 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/23 17:28:32 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/24 14:56:39 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	find_mod(t_data *curr, const char *str)
 		curr->mod[i - 1] = 'j';
 	if (str[i] && str[i] == 'z' && ++i)
 		curr->mod[i - 1] = 'z';
-	if (curr->pad && curr->plus)
-		curr->pad--;
+	if (curr->plus && curr->chk)
+		curr->chk = 0;
 }
 
 void	chk(va_list list, int *i)
@@ -44,7 +44,7 @@ void	find_width_precision(t_data *curr, const char *str, va_list list)
 	while (str[i] && ft_isdigit(str[i]))
 		i++;
 	while (str[i] && str[i] != '.' && str[i] != 'l' && str[i] != 'h'
-			&& str[i] != 'z' && str[i] != 'U' && str[i] != 'u'
+			&& str[i] != 'z' && str[i] != 'U' && str[i] != 'u' && str[i] != 'b'
 			&& str[i] != 'j' && str[i] != 'd' && str[i] != 'D' && str[i] != 'i'
 			&& str[i] != 'o' && str[i] != 'O' && str[i] != 'x' && str[i] != 'X'
 			&& str[i] != 'p' && str[i] != 's' && str[i] != 'S' && str[i] != 'c')
@@ -70,7 +70,7 @@ void	find_flags(t_data *curr, const char *str, va_list list)
 			&& str[i] != 'j' && str[i] != 'd' && str[i] != 'D' && str[i] != 'i'
 			&& str[i] != 'o' && str[i] != 'O' && str[i] != 'x' && str[i] != 'X'
 			&& str[i] != 'p' && str[i] != 's' && str[i] != 'S' && str[i] != 'c'
-			&& !(str[i] >= '1' && str[i] <= '9'))
+			&& str[i] != 'b' && !(str[i] >= '1' && str[i] <= '9'))
 	{
 		if (str[i] == '#')
 			curr->hash = 1;

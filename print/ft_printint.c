@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:06:50 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/23 13:51:40 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/24 14:58:21 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int			check(int long long *nbr, t_data *cur, char **p)
 		cur->chrfil = 32;
 	if ((cur->plus && cur->lr) || (cur->plus && !cur->pad))
 		cur->pad++;
+	if (cur->chrfil == 32 && cur->chk && cur->pad)
+		cur->chk = 0;
 	if (!cur->precision && cur->precheck && !nbr && !cur->pad)
 		return (1);
 	if (!nbr && cur->chrfil == 48 && cur->pad)
@@ -91,7 +93,6 @@ int			check(int long long *nbr, t_data *cur, char **p)
 		if ((cur->pad && cur->chrfil == 48) || (cur->chk && !cur->pad))
 			cur->pad--;
 	}
-	*p = ft_itoabase(*nbr, 10);
 	return (0);
 }
 
@@ -104,6 +105,7 @@ int			print_int(t_data *cur, va_list list)
 	nbr = nint_flags(cur, list);
 	if (handle_0(cur, &buf, &print, 0) && check(&nbr, cur, &print))
 		return (1);
+	print = ft_itoabase(nbr, 10);
 	if (cur->precheck && cur->precision > (int)ft_strlen(print))
 		print = make_pre(cur, print);
 	if (cur->plus && !cur->negative && cur->chrfil == 32)
@@ -111,7 +113,7 @@ int			print_int(t_data *cur, va_list list)
 	else if (cur->negative && cur->chrfil != 48)
 		print = prep_x(print, "-");
 	if ((int)ft_strlen(print) < cur->pad)
-		buf = new_data(print, cur);
+		buf = ft_malset(cur->pad - ft_strlen(print), cur->chrfil);
 	if (cur->chrfil == 48 && !cur->lr && cur->negative)
 		buf = prep_x(buf, "-");
 	if (cur->plus && cur->chrfil == 48)

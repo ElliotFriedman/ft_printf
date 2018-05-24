@@ -86,8 +86,7 @@ SRC = ft_atoi.c \
 	  ft_putwchar.c \
 	  ft_nwputstr.c \
 	  ft_wstrlen.c \
-
-
+	  ft_malset.c \
 
 OBJ = $(SRC:.c=.o)
 

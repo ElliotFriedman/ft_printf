@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:23:10 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/23 17:31:15 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/24 13:09:05 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int		find(char c, va_list list, t_data *curr)
 		return (print_hex(c, curr, list));
 	else if (c == 'p')
 		return (print_addy(curr, list));
+	else if (c == 'b')
+		return (print_binary(curr, list));
 	return (0);
 }
 
