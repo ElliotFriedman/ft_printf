@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:40:29 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/23 14:25:17 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/23 16:48:43 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int					empty(t_data *curr);
 int					ft_printf(const char *str, ...);
 char				*ft_itoabase(long long nbr, int base);
 char				*ft_uitoabase(unsigned long long nbr, int base);
-void				find_flags(t_data *curr, const char *str);
+void				find_flags(t_data *curr, const char *str, va_list list);
 long long			nint_flags(t_data *curr, va_list list);
 unsigned long long	uint_flags(t_data *curr, va_list list);
 int					print_char(t_data *curr, va_list list);

@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:23:10 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 19:04:12 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/23 16:49:01 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		ft_printf(const char *str, ...)
 	va_start(list, str);
 	while ((tmp = ft_putstr_until(&str[curr->sum], curr)))
 	{
-		find_flags(curr, &str[curr->sum]);
+		find_flags(curr, &str[curr->sum], list);
 		while ((str[curr->sum])
 				&& !(find(str[curr->sum], list, curr)))
 		{
