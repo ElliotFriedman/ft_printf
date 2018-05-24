@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:06:50 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/24 14:58:21 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/24 16:32:21 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int			handle_0(t_data *curr, char **a, char **b, int on)
 		*a = 0;
 		*b = 0;
 	}
+	if (curr->plus && curr->chrfil == 48 && curr->pad)
+		curr->pad--;
 	return (1);
 }
 
@@ -73,7 +75,7 @@ int			check(int long long *nbr, t_data *cur, char **p)
 		cur->chrfil = 32;
 	if ((cur->plus && cur->lr) || (cur->plus && !cur->pad))
 		cur->pad++;
-	if (cur->chrfil == 32 && cur->chk && cur->pad)
+	if (cur->chrfil == 48 && cur->chk && cur->pad && cur->precheck)
 		cur->chk = 0;
 	if (!cur->precision && cur->precheck && !nbr && !cur->pad)
 		return (1);

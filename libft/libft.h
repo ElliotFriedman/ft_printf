@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 17:02:44 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/23 23:10:09 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/24 16:35:30 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include "unistd.h"
 # include "stdlib.h"
+# include <wchar.h>
 
 typedef struct	s_data
 {
