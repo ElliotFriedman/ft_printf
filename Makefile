@@ -6,7 +6,7 @@
 #    By: efriedma <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/04 17:04:47 by efriedma          #+#    #+#              #
-#    Updated: 2018/05/22 21:57:05 by efriedma         ###   ########.fr        #
+#    Updated: 2018/05/23 17:39:23 by efriedma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC = handle/handle_flags.c \
 	  base/ft_itoabase.c \
 	  base/ft_uitoabase.c \
 	  print/ft_printf.c \
-	  print/ft_print.c \
+	  print/ft_print0.c \
 	  print/ft_print3.c \
 	  print/ft_mputstr.c \
 	  print/ft_print2.c \
