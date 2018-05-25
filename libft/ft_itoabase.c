@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/02 22:49:16 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 19:03:21 by efriedma         ###   ########.fr       */
+/*   Created: 2018/05/25 15:30:52 by efriedma          #+#    #+#             */
+/*   Updated: 2018/05/25 15:31:03 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
 char	set(int nbr)
 {

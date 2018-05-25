@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:40:29 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/24 14:18:12 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/25 15:36:37 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void				ft_nputstr(char *str, t_data *curr, int precise);
 char				*new_data(char *print, t_data *curr);
 int					empty(t_data *curr);
 int					ft_printf(const char *str, ...);
-char				*ft_itoabase(long long nbr, int base);
-char				*ft_uitoabase(unsigned long long nbr, int base);
 void				find_flags(t_data *curr, const char *str, va_list list);
 long long			nint_flags(t_data *curr, va_list list);
 unsigned long long	uint_flags(t_data *curr, va_list list);

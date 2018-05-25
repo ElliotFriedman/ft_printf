@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 17:02:44 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/24 16:35:30 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/25 15:33:10 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+char			*ft_uitoabase(unsigned long long nbr, int base);
+char			*ft_itoabase(long long nbr, int base);
 char			*ft_malset(int size, char set);
 wchar_t			*ft_wstrdup(const char *s);
 int				ft_wstrlen(wchar_t *str);

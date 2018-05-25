@@ -6,7 +6,7 @@
 #    By: efriedma <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/04 17:04:47 by efriedma          #+#    #+#              #
-#    Updated: 2018/05/24 23:11:13 by efriedma         ###   ########.fr        #
+#    Updated: 2018/05/25 15:35:19 by efriedma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,6 @@ LIBFT := libft/
 
 SRC = handle/handle_flags.c \
 	  handle/ft_parse.c \
-	  base/ft_itoabase.c \
-	  base/ft_uitoabase.c \
 	  print/ft_printf.c \
 	  print/ft_print0.c \
 	  print/ft_print3.c \
