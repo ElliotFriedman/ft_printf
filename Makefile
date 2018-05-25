@@ -6,11 +6,11 @@
 #    By: efriedma <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/04 17:04:47 by efriedma          #+#    #+#              #
-#    Updated: 2018/05/24 16:33:29 by efriedma         ###   ########.fr        #
+#    Updated: 2018/05/24 23:11:13 by efriedma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -Wall -Wextra -Werror -I libft
+CFLAGS = -g -Wall -Wextra -Werror -I libft
 
 NAME = libftprintf.a
 

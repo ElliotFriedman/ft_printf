@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 21:40:30 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/22 18:54:17 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/24 23:57:40 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ int		hexgen2(char *print, char *snew, t_data *curr)
 	return (1);
 }
 
+void	chk_flag(char c, t_data *cu)
+{
+	if (c == 'O')
+		ft_strncpy(cu->mod, "ll", 2);
+}
+
 int		print_octal(char c, t_data *cu, va_list list)
 {
 	char				*print;
@@ -45,7 +51,7 @@ int		print_octal(char c, t_data *cu, va_list list)
 
 	i = 0;
 	snew = 0;
-	c == '0' ? ft_strncpy(cu->mod, "l", 1) : ft_bzero(cu->mod, 2);
+	chk_flag(c, cu);
 	stor = uint_flags(cu, list);
 	if (cu->lr && cu->chrfil == 48)
 		cu->chrfil = 32;

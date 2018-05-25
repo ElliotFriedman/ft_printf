@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 00:06:50 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/24 16:32:21 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/25 15:08:08 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int			handle_0(t_data *curr, char **a, char **b, int on)
 	}
 	if (curr->plus && curr->chrfil == 48 && curr->pad)
 		curr->pad--;
+	if (curr->precheck || curr->lr)
+		curr->chrfil = 32;
 	return (1);
 }
 
@@ -71,8 +73,8 @@ int			edgec(t_data *curr, char *print)
 
 int			check(int long long *nbr, t_data *cur, char **p)
 {
-	if (cur->precheck || cur->lr)
-		cur->chrfil = 32;
+	if (!*nbr && cur->precheck && !cur->precision && !cur->pad && !cur->plus)
+		return (1);
 	if ((cur->plus && cur->lr) || (cur->plus && !cur->pad))
 		cur->pad++;
 	if (cur->chrfil == 48 && cur->chk && cur->pad && cur->precheck)
@@ -117,9 +119,9 @@ int			print_int(t_data *cur, va_list list)
 	if ((int)ft_strlen(print) < cur->pad)
 		buf = ft_malset(cur->pad - ft_strlen(print), cur->chrfil);
 	if (cur->chrfil == 48 && !cur->lr && cur->negative)
-		buf = prep_x(buf, "-");
+		buf = prep_x(buf, ft_strdup("-"));
 	if (cur->plus && cur->chrfil == 48)
-		buf = prep_x(buf, "+");
+		buf = prep_x(buf, ft_strdup("+"));
 	if (!cur->pad && !cur->precheck && cur->chk && !cur->plus)
 		print = prep_x(print, " ");
 	if (cur->pad && cur->precision && !cur->lr && cur->chk)

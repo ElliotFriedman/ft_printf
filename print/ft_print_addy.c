@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 18:59:59 by efriedma          #+#    #+#             */
-/*   Updated: 2018/05/24 12:52:57 by efriedma         ###   ########.fr       */
+/*   Updated: 2018/05/24 19:48:15 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		print_addy(t_data *curr, va_list list)
 	ft_strncpy(curr->mod, "ll", 2);
 	stor = uint_flags(curr, list);
 	if (!stor && curr->precheck && !curr->pad && !curr->precision)
-		return (hexgen("0x", 0, curr));
+		return (hexgen(ft_strdup("0x"), 0, curr));
 	print = ft_uitoabase(stor, 16);
 	if (curr->precision > ((int)ft_strlen(print) + 2))
 	{
