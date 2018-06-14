@@ -89,6 +89,7 @@ SRC = ft_atoi.c \
 	  ft_malset.c \
 	  ft_itoabase.c \
 	  ft_uitoabase.c \
+	  ft_memjoin.c \
 
 OBJ = $(SRC:.c=.o)
 
